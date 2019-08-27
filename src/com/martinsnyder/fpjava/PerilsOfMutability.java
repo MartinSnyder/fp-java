@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public interface MutabilityNightmare {
+public interface PerilsOfMutability {
     class Person {
         public String givenName;
         public String familyName;
