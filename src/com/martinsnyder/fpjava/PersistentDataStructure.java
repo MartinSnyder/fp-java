@@ -66,8 +66,8 @@ interface PersistentDataStructure {
         List<Integer> numbers = new Node<>(8, new Node<>(6, new Node<>(7, new Node<>(5, new Node<>(3, new Node<>(0, new Node<>(9, new Empty<>())))))));
 
         System.out.println("List is " + listToString(numbers));
-        System.out.println("Length is " + lengthRecursive(numbers));
-        System.out.println("Length2 is " + length(numbers));
+        System.out.println("lengthRecursive is " + lengthRecursive(numbers));
+        System.out.println("Length is " + length(numbers));
         System.out.println("Sum is " + sum(numbers));
     }
 }
