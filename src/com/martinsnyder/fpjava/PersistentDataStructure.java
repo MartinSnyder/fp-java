@@ -1,3 +1,9 @@
+/*
+ *  Apache License
+ *  Version 2.0, January 2004
+ *
+ *  See LICENSE file in project root for details
+ */
 package com.martinsnyder.fpjava;
 
 interface PersistentDataStructure {

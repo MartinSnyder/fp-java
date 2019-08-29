@@ -1,10 +1,16 @@
+/*
+ *  Apache License
+ *  Version 2.0, January 2004
+ *
+ *  See LICENSE file in project root for details
+ */
 package com.martinsnyder.fpjava;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public interface PerilsOfMutability {
+interface PerilsOfMutability {
     class Person {
         public String givenName;
         public String familyName;
