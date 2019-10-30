@@ -42,6 +42,19 @@ interface PersistentDataStructure {
         }
     }
 
+    static <T> int lengthTailRecursive(List<T> l) {
+        return lengthTailR(l, 0);
+    }
+
+    private static <T> int lengthTailR(List<T> l, int acc) {
+        if (l.isEmpty()) {
+            return acc;
+        }
+        else {
+            return lengthTailR(l.tail(), acc + 1);
+        }
+    }
+
     interface Combiner<R, T> {
         R combine(R r, T t);
     }
@@ -73,6 +86,7 @@ interface PersistentDataStructure {
 
         System.out.println("List is " + listToString(numbers));
         System.out.println("lengthRecursive is " + lengthRecursive(numbers));
+        System.out.println("lengthTailRecursive is " + lengthTailRecursive(numbers));
         System.out.println("Length is " + length(numbers));
         System.out.println("Sum is " + sum(numbers));
     }
