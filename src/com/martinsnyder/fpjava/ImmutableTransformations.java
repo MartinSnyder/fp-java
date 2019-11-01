@@ -7,6 +7,7 @@
 package com.martinsnyder.fpjava;
 
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 interface ImmutableTransformations {
     static void main(String[] args) {
@@ -15,6 +16,7 @@ interface ImmutableTransformations {
                 .stream(intArray)
                 .map(i -> i * 2)
                 .filter(i -> i > 5)
+                .flatMap(i -> Stream.of(i, i))
                 .reduce((acc, i) -> acc + i).get();
 
         System.out.println("The magic number is " + magicNumber);

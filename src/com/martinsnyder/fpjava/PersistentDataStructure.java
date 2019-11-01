@@ -59,32 +59,53 @@ interface PersistentDataStructure {
         R combine(R r, T t);
     }
 
-    static <R, T> R fold(R acc, List<T> l, Combiner<R, T> combiner) {
+    static <R, T> R foldLeft(R acc, List<T> l, Combiner<R, T> combiner) {
         if (l.isEmpty()) {
             return acc;
         }
         else {
             R nextAcc = combiner.combine(acc, l.head());
-            return fold(nextAcc, l.tail(), combiner);
+            return foldLeft(nextAcc, l.tail(), combiner);
+        }
+    }
+
+    static <R, T> R foldRight(R acc, List<T> l, Combiner<R, T> combiner) {
+        if (l.isEmpty()) {
+            return acc;
+        }
+        else {
+            R interior = foldRight(acc, l.tail(), combiner);
+            return combiner.combine(interior, l.head());
         }
     }
 
     static <T> int length(List<T> l) {
-        return fold(0, l, (acc, next) -> acc + 1);
+        return foldLeft(0, l, (acc, next) -> acc + 1);
     }
 
     static <T> String listToString(List<T> l) {
-        return fold("", l, (acc, next) -> acc + next.toString());
+        return foldLeft("", l, (acc, next) -> acc + next.toString());
     }
 
     static int sum(List<Integer> l) {
-        return fold(0, l, (acc, next) -> acc + next);
+        return foldLeft(0, l, (acc, next) -> acc + next);
+    }
+
+    interface Transformer<R, T> {
+        R transform(T t);
+    }
+
+    static <R, T> List<R> map(List<T> l, Transformer<R, T> transformer) {
+        return foldRight((List<R>)new Empty<R>(), l, (soFar, el) ->
+            new Node<>(transformer.transform(el), soFar)
+        );
     }
 
     static void main(String[] args) {
         List<Integer> numbers = new Node<>(8, new Node<>(6, new Node<>(7, new Node<>(5, new Node<>(3, new Node<>(0, new Node<>(9, new Empty<>())))))));
 
-        System.out.println("List is " + listToString(numbers));
+        System.out.println("List is        " + listToString(numbers));
+        System.out.println("Offset List is " + listToString(map(numbers, i -> i > 0 ? i -1: i)));
         System.out.println("lengthRecursive is " + lengthRecursive(numbers));
         System.out.println("lengthTailRecursive is " + lengthTailRecursive(numbers));
         System.out.println("Length is " + length(numbers));
