@@ -79,7 +79,7 @@ interface PersistentDataStructure {
         }
     }
 
-    static <T> int length(List<T> l) {
+    static <T> int lengthWithFold(List<T> l) {
         return foldLeft(0, l, (acc, next) -> acc + 1);
     }
 
@@ -106,9 +106,9 @@ interface PersistentDataStructure {
 
         System.out.println("List is        " + listToString(numbers));
         System.out.println("Offset List is " + listToString(map(numbers, i -> i > 0 ? i -1: i)));
-        System.out.println("lengthRecursive is " + lengthRecursive(numbers));
+        System.out.println("lengthRecursive is     " + lengthRecursive(numbers));
         System.out.println("lengthTailRecursive is " + lengthTailRecursive(numbers));
-        System.out.println("Length is " + length(numbers));
+        System.out.println("lengthWithFold is      " + lengthWithFold(numbers));
         System.out.println("Sum is " + sum(numbers));
     }
 }
